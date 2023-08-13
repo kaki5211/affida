@@ -1,0 +1,25 @@
+ホーム: otherlist tag
+othertag: name羅列
+othertag[param]: 一致羅列、
+
+V_list: サンプル、date_listで羅列
+parformer: name羅列
+parformer[param]: 一致羅列、（表）
+tag: name羅列、
+tag[param]: 一致羅列
+maker: name羅列
+maker[param]: 一致羅列
+
+serach: 詳細
+
+
+
+
+プロフィール: 表・画像・コンテンツ作成
+
+
+// subcontants //parfomer
+// subcontents_list //performer: [{name: actor1}, {name: actor2}]
+
+// param // actor1
+// param_info //{name: "actor1", barth: "2023-07-16", contents: "aa"}
