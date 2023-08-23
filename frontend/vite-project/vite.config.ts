@@ -18,6 +18,9 @@ export default defineConfig({
       // Vuetify の設定
     ),
   ],
+  server: {
+    host: '172.20.10.5', // 希望のアドレスに置き換えてください
+  },
 
 
 

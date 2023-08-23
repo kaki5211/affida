@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Video, Performer, Maker, Label, Series, Tag, Thumbnail, Kyounuki, Test
+from .models import Video, Performer, Maker, Label, Series, Tag, Thumbnail, Kyounuki, Test, Contents, ContentsTag
 from django.core.exceptions import ObjectDoesNotExist
 from django.apps import apps
 import datetime
@@ -856,3 +856,114 @@ def create_video(data_dict, performers_instance):
     video = Video.objects.create(**data_dict)
     video.performers.set([x.id for x in performers_instance])
     return video
+
+
+
+
+
+
+class ContentsSerializer(serializers.ModelSerializer):
+    def create(self, validated_data):
+        contents_info = validated_data.get('contents')
+        contents_info = """
+        <title>あいうえお
+        <subtitle>かきくけこ
+        <text>text
+        <blockquote>blockquote<bookpage>2
+        <title>2
+        """
+
+        lines = contents_info.split("\n")
+        contents_ = []
+        contents = []
+        current_page = None
+        count = 1
+        count_title = 0
+        count_subtitle = 0
+        count_page = 0
+
+        for line in lines:
+            line = line.strip()
+            if not line:
+                continue
+            if line == "":
+                continue
+
+            tag, *content = line.split(">")
+            tag = tag[1:].lower()
+            content = ">".join(content).strip()
+
+            if tag == "title":
+                count_title += 1
+            elif tag == "subtitle":
+                count_subtitle += 1
+            elif tag == "page":
+                if count_page != 0:
+                    count_page = int(content) - 1
+                    contents_.append(
+                        {"page": count_page, "contents": contents})
+                    contents = []
+                continue
+
+
+            if "<bookpage>" in content:
+                content, page = content.split("<bookpage>")
+                page = int(page)
+                obj = {
+                    "tag": tag,
+                    "text": content,
+                    "count": count,
+                    "title": count_title,
+                    "subtitle": count_subtitle,
+                    "blockquotepage": page
+                }
+            else:
+                obj = {
+                    "tag": tag,
+                    "text": content,
+                    "count": count,
+                    "title": count_title,
+                    "subtitle": count_subtitle
+                }
+            contents.append(obj)
+            count += 1
+        
+        # ManyToManyField の関連オブジェクトを新しいセットに置き換えます
+
+        contents_tags_info = validated_data.pop('tags', [])
+        validated_data["contents"] = contents
+        contents = Contents.objects.create(**validated_data)
+
+        contents.tags.set([x.id for x in contents_tags_info])
+
+  
+        return contents
+    
+    class Meta:
+        model = Contents
+        fields = '__all__'
+
+
+
+class GetContentsSerializer(serializers.ModelSerializer):
+    def create(self, validated_data):
+        # レコード作成を禁止するため、何も処理せずに例外を発生させます
+        raise serializers.ValidationError("Creating records is not allowed.")
+    class Meta:
+        model = Contents
+        fields = '__all__'
+
+
+
+
+class ContentsTagSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ContentsTag
+        fields = '__all__'
+class GetContentsTagSerializer(serializers.ModelSerializer):
+    def create(self, validated_data):
+        # レコード作成を禁止するため、何も処理せずに例外を発生させます
+        raise serializers.ValidationError("Creating records is not allowed.")
+    class Meta:
+        model = ContentsTag
+        fields = '__all__'

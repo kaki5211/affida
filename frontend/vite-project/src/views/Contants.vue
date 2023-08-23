@@ -150,7 +150,6 @@ import { Icon } from '@iconify/vue';
 import Text_1 from '../components/_Text_1.vue';
 
 
-
 export default defineComponent({
   name: 'App',
   components: {
@@ -170,20 +169,6 @@ export default defineComponent({
       search_view_performer: true,
       search_view_tag: true,
 
-
-      // searchparams: {
-      //   performers: null,
-      //   tags: ["tag1"],
-      //   maker: ["メーカー２"],
-      //   label: null,
-      //   series: null,
-      //   duration: null,
-      //   title: null,
-      //   description: null,
-      //   views: null,
-      //   kyounuki_post_day: null,
-      //   active: null,
-      // },
       filteredData: [],
       media: [false,false,false,false,false,false,false,false,false,false],
       model: [0,0,0,0,0,0,0,0,0,0],
@@ -224,93 +209,14 @@ export default defineComponent({
     tab: null,
     }    
   },
-  // watch: {
-  //   'searchparams.tags': {
-  //     handler: 'updateFilteredData',
-  //     deep: true,
-  //   },
-  // },
-  mounted() {
-    // ビデオ要素の高さを設定
-    this.setVideoHeight();
-    // ウィンドウのリサイズ時にビデオの高さを再計算
-    window.addEventListener("resize", this.setVideoHeight);
-  },
 
+  mounted() {
+  },
 
   beforeUnmount() {
-    window.removeEventListener("resize", this.setVideoHeight);
-  },  
+  },
+
   methods: {
-  parseJson(value) {
-    return JSON.parse(value.replace(/'/g, '"'));
-  },
-  playVideo() {
-      const videoPlayer = this.$refs.videoPlayer;
-      videoPlayer.play();
-  },
-
-  handleTouchStart(event, i, Index) {
-    this.startX = event.touches[0].clientX;
-    this.startIndex = this.model[i];
-  },
-  toggleMedia(index) {
-    this.media.splice(index, 1, !this.media[index]); // spliceメソッドを使って要素を置換する
-  },
-  setVideoHeight() {
-      const video = this.$refs.videoRef;
-      const toolbar = this.$el.querySelector(".control-bar");
-      if (video && toolbar) {
-        const videoHeight = video.getBoundingClientRect().height;
-        toolbar.style.height = `${videoHeight}px`;
-      }
-  },
-  handleTagsInput(newSelectedItems) {
-    console.log(VIDEOS.value)
-    console.log(searchparams.value.tags)
-    // this.filteredData = filterVideo(VIDEOS.value, searchparams.value.tags);
-    // ここで必要な処理を実行する
-  },
-
-  resetSearchParams(searchparams, item) {
-    if (item == "all") {
-      for (let prop in searchparams) {
-        console.log(prop)
-        searchparams[prop] = [];
-      }
-    } else {
-      searchparams[item] = [];
-    }
-
-    }
-
-
-  // filterVideo(data, searchparams) {
-  //   let filteredData = data
-  //   // if SUBCONTENTS_ALL
-  //   for (let key in searchparams) {
-  //   // 各キーに対する処理を行う（ここではコンソールに表示）
-
-  //     if (searchparams[key] != null) {
-  //       if ((key === "tags" || key === "performers") && ((key === "tags" || key === "performers") && filteredData.length !== 0)) {
-  //       } else {
-  //         filteredData = filteredData.filter(item => {
-  //         if (Array.isArray(searchparams[key])) {
-  //           return searchparams[key].includes(item[key]?.name);
-  //         } else {
-  //           return item[key] && item[key].name === searchparams[key];
-  //         }
-  //       });
-  //       }
-  //     }
-  //   }
-  //   return filteredData;
-  // },
-  // searchparams.tagsが変更されたときに呼ばれるメソッド
-  // updateFilteredData() {
-  //   // filteredDataを再計算
-  //   this.filteredData = this.filterVideo(this.SUBCONTENTS_ALL, this.searchparams);
-  // },
   }
 });
 

@@ -38,14 +38,14 @@ Bold text.
   --my-color-gray: #cc6685;
   --my-color-green: #c1112e;
 }
-/* 
+
 :root {
   --my-color: #455045;
   --my-color-black: #2b302b;
   --my-color-white: #f5f8f5;
   --my-color-gray: #9A9;
   --my-color-green: #1aa179;
-} */
+}
 
 
 

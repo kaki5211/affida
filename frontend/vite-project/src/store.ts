@@ -26,9 +26,9 @@ async function fetchDataAndCommit({ commit, endpoint, mutationType }) {
 
 // URL選択
 // const host = "http://127.0.0.1:8000"
-const host_api = "http://127.0.0.1:8000/api"
+// const host_api = "http://127.0.0.1:8000/api"
 // const host = "http://172.20.10.5:8000"
-// const host_api = "http://172.20.10.5:8000/api"
+const host_api = "http://172.20.10.5:8000/api"
 
 
 
@@ -42,6 +42,8 @@ const store = createStore({
     label_list: null,
     series_list: null,
     kyounuki_list: null,
+    contents_list: null,
+
 
 
     set_videos_loaded: null,
@@ -82,6 +84,7 @@ const store = createStore({
     SET_DEBUG(state, data) { state.debug = data; },
     SET_BREADCRUMBS(state, data) { state.breadcrumbs = data; },
 
+    SET_CONTENTS_LIST(state, data) { state.contents_list = data; },
     
     // SET_CONTENTS(state, data) { state.Contents_list = [data]; },
     // ADD_CONTENTS(state, data) { state.Contents_list.push(data); },
@@ -170,6 +173,9 @@ const store = createStore({
       
       commit('SET_BREADCRUMBS', breadcrumbsList);
     },
+    async FETCH_GET_CONTENTS_LIST({ commit }) {
+      await fetchDataAndCommit({ commit, endpoint: 'contents_list', mutationType: 'SET_CONTENTS_LIST' });
+    },
 
     // async FETCH_GET_URL_LIST({ commit }) {
     //   await fetchDataAndCommit({ commit, endpoint: 'url_list_view', mutationType: 'SET_URL_LIST' });
@@ -226,7 +232,8 @@ const store = createStore({
 
     GET_DEBUG: (state) => state.debug,
     GET_BREADCRUMBS: (state) => state.breadcrumbs,
-    
+
+    GET_CONTENTS_LIST: (state) => state.contents_list,
 
   } 
 });
@@ -247,6 +254,7 @@ const store = createStore({
     await store.dispatch('FETCH_GET_SERIES_LIST');
     await store.dispatch('FETCH_GET_DEBUG');
     await store.dispatch('FETCH_GET_BREADCRUMBS');
+    await store.dispatch('FETCH_GET_CONTENTS_LIST');
 
     
 

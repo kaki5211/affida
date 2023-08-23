@@ -254,7 +254,7 @@ export default defineComponent({
                     <v-col cols="12" aspect-ratio="0.73" class="mx-auto px-0 my-auto">
 
                         <video controls class="w-100 my-auto px-0 my-auto" playsinline autoplay muted>
-                          <source src="src/assets/mov_hts-samp007.mp4" type="video/mp4">
+                          <source src="https://liginc.co.jp/wp-content/uploads/2020/05/D0002060347_00000_V_000.mp4?_=1" type="video/mp4">
                           Your browser does not support the video tag.
                         </video>
                     </v-col>

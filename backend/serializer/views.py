@@ -2,9 +2,9 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import viewsets, filters
 
-from .models import Video, Tag, Performer, Maker, Label, Series, Kyounuki
-from .serializers import VideoSerializer, ThumbnailSerializer, TagSerializer, SeriesSerializer, LabelSerializer, MakerSerializer, PerformerSerializer, KyounukiSerializer
-from .serializers import GetVideoSerializer, GetThumbnailSerializer, GetTagSerializer, GetSeriesSerializer, GetLabelSerializer, GetMakerSerializer, GetPerformerSerializer, GetKyounukiSerializer
+from .models import Video, Tag, Performer, Maker, Label, Series, Kyounuki, Contents, ContentsTag
+from .serializers import VideoSerializer, ThumbnailSerializer, TagSerializer, SeriesSerializer, LabelSerializer, MakerSerializer, PerformerSerializer, KyounukiSerializer, ContentsSerializer, ContentsTagSerializer
+from .serializers import GetVideoSerializer, GetThumbnailSerializer, GetTagSerializer, GetSeriesSerializer, GetLabelSerializer, GetMakerSerializer, GetPerformerSerializer, GetKyounukiSerializer, GetContentsSerializer, GetContentsTagSerializer
 
 from django.db import models
 
@@ -448,6 +448,19 @@ class GetKyounukiAPIView(DefaultAIPView):
     queryset = Kyounuki.objects.all()
     serializer_class = GetKyounukiSerializer
 
+class ContentsAPIView(DefaultAIPView):
+    queryset = Contents.objects.all()
+    serializer_class = ContentsSerializer
+class GetContentsAPIView(DefaultAIPView):
+    queryset = Contents.objects.all()
+    serializer_class = GetContentsSerializer
+
+class ContentsTagAPIView(DefaultAIPView):
+    queryset = ContentsTag.objects.all()
+    serializer_class = ContentsTagSerializer
+class GetContentsTagAPIView(DefaultAIPView):
+    queryset = ContentsTag.objects.all()
+    serializer_class = GetContentsTagSerializer
 
 
 

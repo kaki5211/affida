@@ -71,10 +71,39 @@ class Video(models.Model):
 
     def __str__(self):
         return self.productnumber
+
+
+
+class ContentsTag(models.Model):
+    name = models.CharField(max_length=255, unique=True)
+    name_eng = models.CharField(max_length=255, unique=True, blank=True, null=True)
+    def __str__(self):
+        return self.name
+
+class Contents(models.Model):
+    title = models.CharField(max_length=255, blank=True, null=True)
+    contents = models.TextField(blank=True, null=True)
+    views = models.IntegerField(blank=True, null=True)
+    tags = models.ManyToManyField(ContentsTag, blank=True, null=True)
+
+    def __str__(self):
+        return self.title
     
+    # contents = 
+    #     <title>あいうえお
+    #     <subtitle>かきくけこ
+    #     <text>text
+    #     <blockquote>blockquote<bookpage>2
+    #     <title>2
+
+
 
 class Test(models.Model):
     maker = models.ForeignKey(Maker, on_delete=models.CASCADE, blank=True, null=True)
     teststr = models.CharField(max_length=255, blank=True, null=True)
     def __str__(self):
         return self.maker
+    
+
+
+    

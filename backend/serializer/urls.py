@@ -10,8 +10,8 @@ from django.urls import include, path
 
 from rest_framework import routers
 # from .views import VideoCreateView, VideoAPIView
-from .views import VideoAPIView ,MakerAPIView ,LabelAPIView ,SeriesAPIView ,PerformerAPIView ,KyounukiAPIView, TagAPIView, UpdateVideoAPIView
-from .views import GetVideoAPIView ,GetMakerAPIView ,GetLabelAPIView ,GetSeriesAPIView ,GetPerformerAPIView ,GetKyounukiAPIView, GetTagAPIView
+from .views import VideoAPIView ,MakerAPIView ,LabelAPIView ,SeriesAPIView ,PerformerAPIView ,KyounukiAPIView, TagAPIView, UpdateVideoAPIView, ContentsAPIView, ContentsTagAPIView
+from .views import GetVideoAPIView ,GetMakerAPIView ,GetLabelAPIView ,GetSeriesAPIView ,GetPerformerAPIView ,GetKyounukiAPIView, GetTagAPIView, GetContentsAPIView, GetContentsTagAPIView
 from .views import TestAPIView, GetUrlAPIView, Video2APIView
 from .views import CreateVideoAPIView, CreatePerformerAPIView
 
@@ -24,6 +24,9 @@ router.register('label_list', LabelAPIView, basename='label_list')
 router.register('series_list', SeriesAPIView, basename='series_list')
 router.register('tag_list', TagAPIView, basename='tag_list')
 router.register('test_list', TestAPIView, basename='test_list')
+router.register('contents_list', ContentsAPIView, basename='contents_list')
+router.register('contentstag_list', ContentsTagAPIView, basename='contentstag_list')
+
 
 router.register('videos_view', GetVideoAPIView, basename='videos_view')
 router.register('performer_list_view', GetPerformerAPIView, basename='performer_list_view')
@@ -32,6 +35,9 @@ router.register('maker_list_view', GetMakerAPIView, basename='maker_list_view')
 router.register('label_list_view', GetLabelAPIView, basename='label_list_view')
 router.register('series_list_view', GetSeriesAPIView, basename='series_list_view')
 router.register('tag_list_view', GetTagAPIView, basename='tag_list_view')
+router.register('contents_list_view', ContentsAPIView, basename='contents_list_view')
+router.register('contentstag_list_view', ContentsTagAPIView, basename='contentstag_list_view')
+
 
 router.register('videos_update', UpdateVideoAPIView, basename='videos_update')
     
