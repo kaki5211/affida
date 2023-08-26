@@ -21,8 +21,8 @@ import { createMetaManager } from 'vue-meta'
 
 import VSkeletonLoader from 'v-skeleton-loader';
 
-import VueVideoPlayer from '@videojs-player/vue'
-import 'video.js/dist/video-js.css'
+// import VueVideoPlayer from '@videojs-player/vue'
+// import 'video.js/dist/video-js.css'
 
 
 // const app = createApp(App)
